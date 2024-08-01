@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h5 class="mt-5">Login</h5>
+        <form id="loginForm" class="form-inline mb-4">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Login</button>
+        </form>
+        <div id="message" class="alert" role="alert" style="display:none;"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+            const data = await response.json();
+            const message = document.getElementById('message');
+            if (response.status === 200) {
+                message.className = 'alert alert-success';
+                message.textContent = data.message;
+                message.style.display = 'block';
+                window.location.href = '/';
+            } else {
+                message.className = 'alert alert-danger';
+                message.textContent = data.error;
+                message.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

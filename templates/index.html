@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gin CRUD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+    <body>
+        <div class="container">
+            <h6 class="mt-5">Welcome to the Go-Gin CRUD Application</h6>
+            <p>Logged in as:=><span id="userName">{{.Name}}</span> (<span id="userEmail">{{.Email}}</span>)</p>
+            <div class="mt-4">
+                <a href="/book_list" class="btn btn-primary">View Books List</a>
+                <a href="/users" class="btn btn-secondary">View Users List</a>
+                <a href="/logout" class="btn btn-danger">Log Out</a>
+            </div>
+        </div>
+    </body>
+</html>
